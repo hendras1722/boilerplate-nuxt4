@@ -24,8 +24,6 @@ const isActive = computed(() => {
 });
 
 const getMenuClasses = computed(() => {
-  console.log(isActive.value)
-
   if (isActive.value) {
     return 'bg-primary text-white';
   }
