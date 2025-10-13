@@ -18,6 +18,7 @@ const dataManagementMenu = [
     id: 'data-master',
     label: 'Data Master',
     icon: 'ic:baseline-article',
+    to: '/admin/user',
     children: [
       {
         id: 'users',

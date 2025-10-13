@@ -24,8 +24,10 @@ const isActive = computed(() => {
 });
 
 const getMenuClasses = computed(() => {
+  console.log(isActive.value)
+
   if (isActive.value) {
-    return 'bg-blue-600 text-white';
+    return 'bg-primary text-white';
   }
   return 'text-gray-700 hover:bg-gray-100 hover:text-gray-900';
 });
@@ -63,7 +65,7 @@ function handleLinkClick() {
           <span
             v-if="depth > 0"
             class="w-2 h-2 rounded-full mr-3 flex-shrink-0"
-            :class="isActive ? 'bg-blue-500' : 'bg-gray-400'"
+            :class="isActive ? 'bg-primary' : 'bg-gray-400'"
           />
           <span class="truncate">{{ item.label }}</span>
         </div>
@@ -75,7 +77,7 @@ function handleLinkClick() {
 
       <template #content>
         <div
-          class="bg-white rounded-lg shadow-xl border border-gray-200 py-2 min-w-[220px] max-w-[300px]"
+          class="bg-white rounded-lg shadow-xl py-2 px-2 min-w-[220px] max-w-[300px]"
         >
           <div
             v-if="depth === 0"
@@ -101,7 +103,7 @@ function handleLinkClick() {
     <NuxtLink
       v-else
       :to="item.to"
-      class="group w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 mb-1"
+      class="group w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 mb-1 "
       :class="[getMenuClasses]"
       @click="handleLinkClick"
     >
@@ -113,7 +115,7 @@ function handleLinkClick() {
       <span
         v-if="depth > 0"
         class="w-2 h-2 rounded-full mr-3 flex-shrink-0"
-        :class="isActive ? 'bg-blue-500' : 'bg-gray-400'"
+        :class="isActive ? 'bg-primary' : 'bg-gray-400'"
       />
       <span class="truncate">{{ item.label }}</span>
     </NuxtLink>
