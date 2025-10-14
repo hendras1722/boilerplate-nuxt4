@@ -16,6 +16,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'id'
+      },
       title: 'Nuxt Vite PWA',
       meta: [
         { charset: 'utf-8' },
@@ -29,11 +32,14 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/css/main.css'],
+  ui: {
+    colorMode: false
+  },
   compatibilityDate: '2025-07-15',
   nitro: {
     esbuild: {
       options: {
-        target: 'esnext'
+        target: 'es2020'
       }
     },
     prerender: {
