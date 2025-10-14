@@ -14,7 +14,7 @@ export default createConfigForNuxt({
   .append({
     files: ['**/*.ts', '**/*.tsx', '**/*.vue', '**/*.js', '**/*.jsx'],
     rules: {
-      // Aturan umum
+      // rule
       'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
       'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 
@@ -41,6 +41,7 @@ export default createConfigForNuxt({
       '@stylistic/semi-style': ['error', 'last'],
 
       '@typescript-eslint/no-explicit-any': 'off',
-      'ts/no-explicit-any': 'off'
+      'ts/no-explicit-any': 'off',
+      'no-explicit-any': 'off'
     }
   });
