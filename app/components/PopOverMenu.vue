@@ -25,7 +25,7 @@ const isActive = computed(() => {
 
 const getMenuClasses = computed(() => {
   if (isActive.value) {
-    return 'bg-primary text-white';
+    return 'bg-primary/80 text-white';
   }
   return 'text-gray-700 hover:bg-gray-100 hover:text-gray-900';
 });

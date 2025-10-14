@@ -30,7 +30,7 @@ const isOpen = computed({
 });
 
 const isActive = computed(() => {
-  const checkActive = (menuItem) => {
+  const checkActive = (menuItem: any) => {
     const selfActive
       = menuItem.to
         && (route.path === menuItem.to || route.path.startsWith(`${menuItem.to}/`));
@@ -47,10 +47,10 @@ const isActive = computed(() => {
 
 const getMenuClasses = computed(() => {
   if (isActive.value) {
-    return 'bg-primary text-white';
+    return 'bg-primary/80 text-white';
   }
   if (isOpen.value) {
-    return 'bg-primary text-white';
+    return 'bg-primary/80 text-white';
   }
   return 'text-gray-700 hover:bg-gray-100 hover:text-gray-900';
 });
@@ -82,7 +82,7 @@ function handleChildToggle(menuId, value) {
           v-if="depth > 0"
           class="w-2 h-2 rounded-full mr-3 flex-shrink-0"
           :class="
-            isActive ? 'bg-primary' : 'bg-gray-400 group-hover:bg-gray-500'
+            isActive ? 'bg-primary/80' : 'bg-gray-400 group-hover:bg-gray-500'
           "
         />
         <UIcon
@@ -119,7 +119,7 @@ function handleChildToggle(menuId, value) {
           v-if="depth > 0"
           class="w-2 h-2 rounded-full mr-3 flex-shrink-0"
           :class="
-            isActive ? 'bg-primary' : 'bg-gray-400 group-hover:bg-gray-500'
+            isActive ? 'bg-primary/80' : 'bg-gray-400 group-hover:bg-gray-500'
           "
         />
         <UIcon

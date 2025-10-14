@@ -1,230 +1,16 @@
 <script setup>
-const sidebarCollapsed = ref(false);
-const sidebarWidth = ref(256);
-const isResizing = ref(false);
+import { dataManagementMenu, settingsMenu } from '~/const/menu';
 
-// State untuk menu yang terbuka
-const openMenus = ref({});
-
-// Menu Configuration dengan nested structure
-const dataManagementMenu = [
-  {
-    id: 'dashboard',
-    label: 'Dashboard',
-    to: '/admin/dashboard',
-    icon: 'ic:outline-analytics'
-  },
-  {
-    id: 'data-master',
-    label: 'Data Master',
-    icon: 'ic:baseline-article',
-    to: '/admin/user',
-    children: [
-      {
-        id: 'users',
-        label: 'Users',
-        to: '/admin/user'
-      },
-      {
-        id: 'suppliers',
-        label: 'Suppliers',
-        to: '/dashboard/suppliers'
-      },
-      {
-        id: 'products',
-        label: 'Products',
-        children: [
-          {
-            id: 'all-products',
-            label: 'All Products',
-            to: '/dashboard/products/all'
-          },
-          {
-            id: 'categories',
-            label: 'Categories',
-            children: [
-              {
-                id: 'main-categories',
-                label: 'Main Categories',
-                to: '/dashboard/products/categories/main'
-              },
-              {
-                id: 'sub-categories',
-                label: 'Sub Categories',
-                to: '/dashboard/products/categories/sub'
-              },
-              {
-                id: 'tags',
-                label: 'Tags',
-                to: '/dashboard/products/categories/tags'
-              }
-            ]
-          },
-          {
-            id: 'inventory',
-            label: 'Inventory',
-            to: '/dashboard/products/inventory'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'reports asd',
-    label: 'Reports',
-    icon: 'ic:baseline-area-chart',
-    children: [
-      {
-        id: 'sales-report',
-        label: 'Sales Report',
-        children: [
-          {
-            id: 'daily-sales',
-            label: 'Daily Sales',
-            to: '/dashboard/reports/sales/daily'
-          },
-          {
-            id: 'monthly-sales',
-            label: 'Monthly Sales',
-            to: '/dashboard/reports/sales/monthly'
-          },
-          {
-            id: 'yearly-sales',
-            label: 'Yearly Sales',
-            to: '/dashboard/reports/sales/yearly'
-          }
-        ]
-      },
-      {
-        id: 'inventory-report',
-        label: 'Inventory Report',
-        to: '/dashboard/reports/inventory'
-      },
-      {
-        id: 'analytics',
-        label: 'Analytics',
-        children: [
-          {
-            id: 'customer-analytics',
-            label: 'Customer Analytics',
-            to: '/dashboard/reports/analytics/customers'
-          },
-          {
-            id: 'product-analytics',
-            label: 'Product Analytics',
-            to: '/dashboard/reports/analytics/products'
-          }
-        ]
-      }
-    ]
-  }
-];
-
-const settingsMenu = [
-  {
-    id: 'settings',
-    label: 'Settings',
-    icon: 'tabler:settings',
-    children: [
-      {
-        id: 'profile',
-        label: 'Profile',
-        to: '/dashboard/settings/profile'
-      },
-      {
-        id: 'security',
-        label: 'Security',
-        children: [
-          {
-            id: 'change-password',
-            label: 'Change Password',
-            to: '/dashboard/settings/security/password'
-          },
-          {
-            id: 'two-factor',
-            label: 'Two-Factor Auth',
-            to: '/dashboard/settings/security/2fa'
-          },
-          {
-            id: 'sessions',
-            label: 'Active Sessions',
-            to: '/dashboard/settings/security/sessions'
-          }
-        ]
-      },
-      {
-        id: 'preferences',
-        label: 'Preferences',
-        to: '/dashboard/settings/preferences'
-      }
-    ]
-  }
-];
-
-// Handle menu toggle
-function handleMenuToggle(menuId, value) {
-  openMenus.value[menuId] = value;
-}
-
-// Computed Classes
-const sidebarClasses = computed(() => [
-  'fixed inset-y-0 left-0 z-50 bg-white shadow-lg transition-all duration-300 ease-in-out',
-  sidebarCollapsed.value ? '-translate-x-full lg:translate-x-0 lg:w-16' : 'w-64'
-]);
-
-const sidebarStyles = computed(() =>
-  !sidebarCollapsed.value && sidebarWidth.value ? { width: `${sidebarWidth.value}px` } : {}
-);
-
-const mainContentClasses = computed(() => [
-  'flex flex-col transition-all duration-300 ease-in-out min-h-screen',
-  sidebarCollapsed.value ? 'lg:ml-16' : 'lg:ml-64'
-]);
-
-const mainContentStyles = computed(() =>
-  !sidebarCollapsed.value && sidebarWidth.value ? { marginLeft: `${sidebarWidth.value}px` } : {}
-);
-
-// Resize Handlers
-function startResize() {
-  if (isResizing.value)
-    return;
-  isResizing.value = true;
-
-  const handleMove = (e) => {
-    if (!isResizing.value)
-      return;
-    const newWidth = e.clientX;
-    if (newWidth >= 200 && newWidth <= 400) {
-      sidebarWidth.value = newWidth;
-    }
-  };
-
-  const handleStop = () => {
-    isResizing.value = false;
-    window.removeEventListener('mousemove', handleMove);
-    window.removeEventListener('mouseup', handleStop);
-  };
-
-  window.addEventListener('mousemove', handleMove);
-  window.addEventListener('mouseup', handleStop);
-}
-
-// Responsive Handler
-function handleWindowResize() {
-  if (window.innerWidth < 1024) {
-    sidebarCollapsed.value = true;
-  }
-}
-
-onMounted(() => {
-  handleWindowResize();
-  window.addEventListener('resize', handleWindowResize);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', handleWindowResize);
-});
+const {
+  sidebarClasses,
+  sidebarStyles,
+  mainContentClasses,
+  mainContentStyles,
+  startResize,
+  handleMenuToggle,
+  openMenus,
+  sidebarCollapsed
+} = useControlSidebar();
 </script>
 
 <template>
@@ -310,6 +96,7 @@ onUnmounted(() => {
           <UButton
             icon
             variant="ghost"
+            aria-label="Toggle sidebar"
             @click="sidebarCollapsed = !sidebarCollapsed"
           >
             <UIcon name="i-heroicons-bars-3-16-solid" />
@@ -336,7 +123,10 @@ onUnmounted(() => {
         </div>
 
         <div class="flex items-center space-x-4">
-          <button class="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+          <button
+            aria-label="notification"
+            class="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          >
             <svg
               class="w-5 h-5"
               fill="currentColor"
