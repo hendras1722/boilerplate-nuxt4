@@ -31,9 +31,8 @@ const isOpen = computed({
 
 const isActive = computed(() => {
   const checkActive = (menuItem: any) => {
-    const selfActive
-      = menuItem.to
-        && (route.path === menuItem.to || route.path.startsWith(`${menuItem.to}/`));
+    const selfActive =
+      menuItem.to && (route.path === menuItem.to || route.path.startsWith(`${menuItem.to}/`));
     if (selfActive) {
       return true;
     }
@@ -81,15 +80,9 @@ function handleChildToggle(menuId, value) {
         <span
           v-if="depth > 0"
           class="w-2 h-2 rounded-full mr-3 flex-shrink-0"
-          :class="
-            isActive ? 'bg-primary/80' : 'bg-gray-400 group-hover:bg-gray-500'
-          "
+          :class="isActive ? 'bg-primary/80' : 'bg-gray-400 group-hover:bg-gray-500'"
         />
-        <UIcon
-          v-else-if="item.icon"
-          :name="item.icon"
-          class="w-5 h-5 mr-3 flex-shrink-0"
-        />
+        <UIcon v-else-if="item.icon" :name="item.icon" class="w-5 h-5 mr-3 flex-shrink-0" />
         <span
           class="truncate"
           :class="{
@@ -118,15 +111,9 @@ function handleChildToggle(menuId, value) {
         <span
           v-if="depth > 0"
           class="w-2 h-2 rounded-full mr-3 flex-shrink-0"
-          :class="
-            isActive ? 'bg-primary/80' : 'bg-gray-400 group-hover:bg-gray-500'
-          "
+          :class="isActive ? 'bg-primary/80' : 'bg-gray-400 group-hover:bg-gray-500'"
         />
-        <UIcon
-          v-else-if="item.icon"
-          :name="item.icon"
-          class="w-5 h-5 mr-3 flex-shrink-0"
-        />
+        <UIcon v-else-if="item.icon" :name="item.icon" class="w-5 h-5 mr-3 flex-shrink-0" />
         <span
           class="truncate"
           :class="{

@@ -26,15 +26,14 @@ export default defineNuxtConfig({
         { name: 'description', content: 'Nuxt Vite PWA' },
         { name: 'format-detection', content: 'telephone=no' }
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ]
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     }
   },
   css: ['~/assets/css/main.css'],
   ui: {
     colorMode: false
   },
+  spaLoadingTemplate: 'loading.html',
   compatibilityDate: '2025-07-15',
   nitro: {
     esbuild: {
@@ -55,20 +54,16 @@ export default defineNuxtConfig({
           const originalOnWarn = config.build.rollupOptions.onwarn;
           config.build.rollupOptions.onwarn = (warning, warn) => {
             if (
-              warning.code === 'SOURCEMAP_BROKEN' && warning.plugin === '@tailwindcss/vite:generate:build'
+              warning.code === 'SOURCEMAP_BROKEN' &&
+              warning.plugin === '@tailwindcss/vite:generate:build'
             ) {
               return;
             }
 
             if (originalOnWarn) {
-              originalOnWarn(
-                warning, warn
-              );
-            }
-            else {
-              warn(
-                warning
-              );
+              originalOnWarn(warning, warn);
+            } else {
+              warn(warning);
             }
           };
         }

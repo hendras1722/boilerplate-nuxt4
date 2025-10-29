@@ -32,13 +32,11 @@ export function useControlSidebar() {
 
   // Resize Handlers
   function startResize() {
-    if (isResizing.value)
-      return;
+    if (isResizing.value) return;
     isResizing.value = true;
 
     const handleMove = (e) => {
-      if (!isResizing.value)
-        return;
+      if (!isResizing.value) return;
       const newWidth = e.clientX;
       if (newWidth >= 200 && newWidth <= 400) {
         sidebarWidth.value = newWidth;

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-
+import Splashscreen from './components/Splashscreen.vue';
 </script>
 
 <template>
   <NuxtPwaManifest />
-  <NuxtLoadingIndicator />
+  <Splashscreen />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

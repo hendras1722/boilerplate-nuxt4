@@ -22,8 +22,5 @@ export default defineEventHandler(async (event) => {
 
   const queryParam = getQuery(event);
 
-  return await proxyRequest(
-    event,
-    withQuery(joinURL(apiBaseUrl, path), queryParam)
-  );
+  return await proxyRequest(event, withQuery(joinURL(apiBaseUrl, path), queryParam));
 });

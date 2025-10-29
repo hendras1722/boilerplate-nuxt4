@@ -7,8 +7,7 @@ const user = toRef(useUserStore());
 const input = ref('');
 function handleSave() {
   console.log(user, 'iniuser');
-  if (user.value.$state.user)
-    return true;
+  if (user.value.$state.user) return true;
 }
 </script>
 
@@ -16,9 +15,6 @@ function handleSave() {
   <div>
     Hello world {{ user.name }}
     <UInput v-model="input" />
-    <UButton
-      label="Save"
-      @click="handleSave"
-    />
+    <UButton label="Save" @click="handleSave" />
   </div>
 </template>

@@ -1,7 +1,11 @@
 /// <reference lib="WebWorker" />
 /// <reference types="vite/client" />
 import { clientsClaim } from 'workbox-core';
-import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
+import {
+  cleanupOutdatedCaches,
+  createHandlerBoundToURL,
+  precacheAndRoute
+} from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 
 declare let self: ServiceWorkerGlobalScope;
@@ -13,14 +17,10 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 let allowlist: undefined | RegExp[];
-if (import.meta.env.DEV)
-  allowlist = [/^\/$/];
+if (import.meta.env.DEV) allowlist = [/^\/$/];
 
 // to allow work offline
-registerRoute(new NavigationRoute(
-  createHandlerBoundToURL('/'),
-  { allowlist }
-));
+registerRoute(new NavigationRoute(createHandlerBoundToURL('/'), { allowlist }));
 
 self.skipWaiting();
 clientsClaim();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { data } = await useHttp('/api/todos/1');
+// const { data } = await useHttp('/api/todos/1');
 
-console.log(data, 'inidata');
+// console.log(data, 'inidata');
 </script>
 
 <template>

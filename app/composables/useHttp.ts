@@ -22,8 +22,7 @@ export function useHttp<T>(url: string, opts: CustomFetchOptions<T> = {}) {
       //   console.log('useApi onResponseError', response._data)
 
       const excludedInterceptor = (statusCode: number): boolean => {
-        if (!excludeInterceptor)
-          return false;
+        if (!excludeInterceptor) return false;
         return excludeInterceptor.includes(statusCode);
       };
       if (!excludedInterceptor(response._data.code)) {
