@@ -7,7 +7,7 @@ type CustomFetchOptions<T> = UseFetchOptions<T> & {
 
 export function useHttp<T>(url: string, opts: CustomFetchOptions<T> = {}) {
   const { excludeInterceptor, ...options } = opts;
-  const defaults: UseFetchOptions<T> = {
+  const defaults: UseFetchOptions<T>       = {
     async onRequest({ options }) {
       const headers = new Headers(options.headers);
       headers.set('X-Requested-With', 'XMLHttpRequest');
@@ -17,7 +17,7 @@ export function useHttp<T>(url: string, opts: CustomFetchOptions<T> = {}) {
     //   if (process.server)
     //     console.log('useApi onResponse', response._data)
     // },
-    async onResponseError({ response }) {
+    async onResponseError({ response }: any) {
       // if (process.server)
       //   console.log('useApi onResponseError', response._data)
 
@@ -25,7 +25,7 @@ export function useHttp<T>(url: string, opts: CustomFetchOptions<T> = {}) {
         if (!excludeInterceptor) return false;
         return excludeInterceptor.includes(statusCode);
       };
-      if (!excludedInterceptor(response._data.code)) {
+      if (!excludedInterceptor(response._data?.code)) {
         // error toast
       }
     }

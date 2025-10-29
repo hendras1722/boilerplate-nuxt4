@@ -1,6 +1,6 @@
 export default defineNuxtPlugin((nuxtApp) => {
   const loadingSplashScreen = useLoadingSplashScreen();
-  const loadingPage = useLoadingPage();
+  const loadingPage         = useLoadingPage();
 
   nuxtApp.hook('page:loading:start', () => {
     loadingSplashScreen.value = true;
@@ -8,7 +8,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   nuxtApp.hook('page:loading:end', () => {
     const i = setTimeout(() => {
-      loadingPage.value = false;
+      loadingPage.value         = false;
       loadingSplashScreen.value = false;
       clearTimeout(i);
     }, 500);
@@ -16,7 +16,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   nuxtApp.hook('page:start', () => {
     loadingSplashScreen.value = false;
-    loadingPage.value = true;
+    loadingPage.value         = true;
   });
 
   nuxtApp.hook('app:error', () => {

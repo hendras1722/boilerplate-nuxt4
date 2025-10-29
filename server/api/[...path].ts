@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 
   // const config = useRuntimeConfig();
   const apiBaseUrl = 'https://jsonplaceholder.typicode.com';
-  const token = getCookie(event, 'oauth/token');
+  const token      = getCookie(event, 'oauth/token');
   // const enterpriseToken = getCookie(event, 'enterprise/token');
   const path = getRouterParam(event, 'path') ?? '';
 

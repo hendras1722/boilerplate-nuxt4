@@ -1,13 +1,12 @@
 export function useControlSidebar() {
   const sidebarCollapsed = ref(false);
-  const sidebarWidth = ref(256);
-  const isResizing = ref(false);
+  const sidebarWidth     = ref(256);
+  const isResizing       = ref(false);
 
-  // State untuk menu yang terbuka
-  const openMenus = ref({});
+  const openMenus = ref<{ [key: string]: string }>({});
 
   // Handle menu toggle
-  function handleMenuToggle(menuId, value) {
+  function handleMenuToggle(menuId: string, value: string) {
     openMenus.value[menuId] = value;
   }
 
@@ -35,7 +34,7 @@ export function useControlSidebar() {
     if (isResizing.value) return;
     isResizing.value = true;
 
-    const handleMove = (e) => {
+    const handleMove = (e: MouseEvent) => {
       if (!isResizing.value) return;
       const newWidth = e.clientX;
       if (newWidth >= 200 && newWidth <= 400) {
