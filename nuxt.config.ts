@@ -33,7 +33,6 @@ export default defineNuxtConfig({
   ui: {
     colorMode: false
   },
-  spaLoadingTemplate: 'loading.html',
   compatibilityDate: '2025-07-15',
   nitro: {
     esbuild: {

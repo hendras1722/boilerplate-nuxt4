@@ -106,6 +106,7 @@ function handleChildToggle(menuId, value) {
       class="group w-full flex items-center justify-between px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200"
       :class="[getMenuClasses]"
       :style="{ paddingLeft: `${depth * 12 + 12}px` }"
+
     >
       <div class="flex items-center min-w-0 flex-1">
         <span

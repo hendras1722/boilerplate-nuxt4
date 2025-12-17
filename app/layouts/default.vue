@@ -12,12 +12,17 @@ const {
   sidebarCollapsed
 } = useControlSidebar();
 
-const loadingPage = useLoadingPage();
+const route = useRoute()
+
+console.log(route.meta.activeSidebar)
 </script>
 
 <template>
-  <div class="h-screen bg-gray-50 overflow-hidden">
-    <aside :class="sidebarClasses" :style="sidebarStyles">
+  <div class="h-screen bg-gray-50 flex overflow-hidden">
+    <aside :class="[
+      sidebarClasses,
+      'flex flex-col h-full'
+    ]" :style="sidebarStyles">
       <div class="flex items-center h-16 px-4 border-b border-gray-200">
         <div
           class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
@@ -26,7 +31,7 @@ const loadingPage = useLoadingPage();
         </div>
       </div>
 
-      <nav class="flex-1 px-2 py-4 space-y-2 overflow-y-auto">
+      <nav class="flex-1 overflow-y-auto px-2 py-4 space-y-2">
         <div v-if="!sidebarCollapsed">
           <div class="space-y-1">
             <h3 class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -77,9 +82,9 @@ const loadingPage = useLoadingPage();
       @click="sidebarCollapsed = true"
     />
 
-    <div :class="mainContentClasses" :style="mainContentStyles">
+    <div  :class="[mainContentClasses, 'flex flex-col h-full flex-1']" :style="mainContentStyles">
       <header
-        class="bg-white shadow-sm border-b border-gray-200 h-16 flex items-center justify-between px-4"
+        class="bg-white shadow-sm border-b border-gray-200 h-16 items-center justify-between px-4 flex"
       >
         <div class="flex items-center space-x-4">
           <UButton
@@ -131,15 +136,10 @@ const loadingPage = useLoadingPage();
         </div>
       </header>
 
-      <main class="flex-1 p-6 overflow-auto">
-        <template v-if="loadingPage">
-          <div className="h-48 w-full bg-gray-200 rounded animate-pulse" />
-        </template>
-        <template v-else>
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-            <slot />
-          </div>
-        </template>
+      <main class="flex-1 overflow-y-auto p-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <slot />
+        </div>
       </main>
     </div>
   </div>

@@ -19,7 +19,7 @@ export const dataManagementMenu = [
       {
         id: 'suppliers',
         label: 'Suppliers',
-        to: '/dashboard/suppliers'
+        to: '/admin/suppliers'
       },
       {
         id: 'products',

@@ -5,12 +5,10 @@ export function useControlSidebar() {
 
   const openMenus = ref<{ [key: string]: string }>({});
 
-  // Handle menu toggle
   function handleMenuToggle(menuId: string, value: string) {
     openMenus.value[menuId] = value;
   }
 
-  // Computed Classes
   const sidebarClasses = computed(() => [
     'fixed inset-y-0 left-0 z-50 bg-white shadow-lg transition-all duration-300 ease-in-out',
     sidebarCollapsed.value ? '-translate-x-full lg:translate-x-0 lg:w-16' : 'w-64'
@@ -29,7 +27,6 @@ export function useControlSidebar() {
     !sidebarCollapsed.value && sidebarWidth.value ? { marginLeft: `${sidebarWidth.value}px` } : {}
   );
 
-  // Resize Handlers
   function startResize() {
     if (isResizing.value) return;
     isResizing.value = true;
